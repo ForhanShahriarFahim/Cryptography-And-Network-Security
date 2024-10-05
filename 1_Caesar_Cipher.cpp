@@ -58,6 +58,10 @@ int main()
     cout << "Encrypted text (Caesar Cipher): " << endl
          << ciphertext << endl;
 
+    // // Write the encrypted text to a file using freopen
+    // freopen("encrypted_caesar.txt", "w", stdout); // Open the output file for writing encrypted text
+    // cout << ciphertext;                           // Write the encrypted text
+
     // Decrypt the ciphertext
     string decryptedText = decryptCaesarCipher(ciphertext, shift);
     cout << "Decrypted text (Original Plaintext): " << endl

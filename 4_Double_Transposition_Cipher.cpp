@@ -40,27 +40,45 @@ string decryptMsg(string msg, int width)
 int main()
 {
     string msg, encMsg, decMsg;
-    ifstream inFile("3_transpose.txt"); // Open the file
 
+    // Opening file
+    ifstream inFile("4_double_transposition.txt");
     if (!inFile)
-    { // Check if the file opened successfully
+    {
         cerr << "Error opening file!" << endl;
         return 1;
     }
 
-    int width;
-
+    // Reading input
     getline(inFile, msg);
-    inFile.close();
-    cout << "Enter the Width: ";
-    cin >> width;
+    inFile.close(); // Closing the file after reading
 
-    encMsg = encryptMsg(msg, width);
-    decMsg = decryptMsg(encMsg, width);
+    // Taking keys (widths)
+    int width1, width2;
+    cout << "Enter the first key (Width): ";
+    cin >> width1;
+    cout << "Enter the second key (Width): ";
+    cin >> width2;
 
+    // Display original text
     cout << "Input Text: " << msg << endl;
-    cout << "Encrypted Message: " << encMsg << endl;
-    cout << "Decrypted Message: " << decMsg << endl;
+
+    // First encryption
+    encMsg = encryptMsg(msg, width1);
+    cout << "CipherText(1): " << encMsg << endl;
+
+    // Second encryption
+    encMsg = encryptMsg(encMsg, width2);
+    cout << "CipherText(2): " << encMsg << endl;
+
+    // First decryption (reverse second encryption)
+    decMsg = decryptMsg(encMsg, width2);
+
+    // Second decryption (reverse first encryption)
+    decMsg = decryptMsg(decMsg, width1);
+
+    // Display decrypted text
+    cout << "PlainText: " << decMsg << endl;
 
     return 0;
 }
