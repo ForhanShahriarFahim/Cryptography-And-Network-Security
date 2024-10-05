@@ -1,0 +1,3 @@
+Plain-Text: a My name is John Connor. Z
+Cipher-Text: p Ce hmqe tf Ores Tqifqo. A
+Decipher-Text: a My name is John Connor. Z

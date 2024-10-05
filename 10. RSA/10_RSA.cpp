@@ -46,38 +46,36 @@ int main()
     int blockSize = to_string(n).length() - 1; // Block size = (digits in n) - 1
     cout << "Block size: " << blockSize << " digits" << endl;
 
-    // Split the original message into blocks dynamically
-    vector<long long> messageBlocks = splitMessageIntoBlocks(message, blockSize);
+    vector<long long> chunksMessage, chunksCipher;
+    vector<int> chunksLength;
 
-    cout << "Original Message Blocks: ";
-    for (auto m : messageBlocks)
-        cout << m << " ";
-    cout << endl;
-
-    // Encryption: ci = mi^e % n
-    vector<long long> encryptedBlocks;
-    for (auto m : messageBlocks)
+    // Divide the plaintext into chunks and convert each to an integer
+    for (int i = 0; i < message.size(); i += blockSize)
     {
-        long long encrypted = modExp(m, e, n);
-        encryptedBlocks.push_back(encrypted);
+        string chunk = message.substr(i, blockSize);
+        chunksMessage.push_back(stoll(chunk)); // Convert chunk to long long
+        chunksLength.push_back(chunk.size());  // Track length for proper decryption
     }
 
-    cout << "Encrypted Message Blocks: ";
-    for (auto c : encryptedBlocks)
-        cout << c << " ";
+    // Encryption: ci = mi^e % n
+    cout << "Ciphertext: ";
+    for (long long chunk : chunksMessage)
+    {
+        long long ciphertext = modExp(chunk, e, n);
+        chunksCipher.push_back(ciphertext);
+        cout << ciphertext << " ";
+    }
     cout << endl;
 
     // Decryption: mi = ci^d % n
-    vector<long long> decryptedBlocks;
-    for (auto c : encryptedBlocks)
+    cout << "Decrypted text: ";
+    for (int i = 0; i < chunksCipher.size(); i++)
     {
-        long long decrypted = modExp(c, d, n);
-        decryptedBlocks.push_back(decrypted);
+        long long decrypted_long = modExp(chunksCipher[i], d, n);
+        string decrypted = to_string(decrypted_long);
+        decrypted = string(chunksLength[i] - decrypted.size(), '0') + decrypted;
+        cout << decrypted << ' ';        
     }
-
-    cout << "Decrypted Message Blocks: ";
-    for (auto m : decryptedBlocks)
-        cout << m << " ";
     cout << endl;
 
     return 0;
