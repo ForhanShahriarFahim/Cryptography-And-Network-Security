@@ -43,11 +43,7 @@ int main()
 
     // Opening file
     ifstream inFile("4_double_transposition.txt");
-    if (!inFile)
-    {
-        cerr << "Error opening file!" << endl;
-        return 1;
-    }
+    
 
     // Reading input
     getline(inFile, msg);

@@ -40,16 +40,8 @@ string decryptMsg(string msg, int width)
 int main()
 {
     string msg, encMsg, decMsg;
-    ifstream inFile("3_transpose.txt"); // Open the file
-
-    if (!inFile)
-    { // Check if the file opened successfully
-        cerr << "Error opening file!" << endl;
-        return 1;
-    }
-
+    ifstream inFile("3_transpose.txt"); // Open the file    
     int width;
-
     getline(inFile, msg);
     inFile.close();
     cout << "Enter the Width: ";

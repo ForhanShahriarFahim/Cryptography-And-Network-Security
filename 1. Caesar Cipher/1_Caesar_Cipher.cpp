@@ -8,7 +8,7 @@ string encryptCaesarCipher(string plaintext, int shift)
     for (char ch : plaintext)
     {
         if(isalpha(ch)){
-            char start = islower(ch) ? 'a' : 'A';
+            char start = isupper(ch) ? 'A' : 'a';
             char cipherChar = ((ch - start + shift) % 26) + start;
             cipherText += cipherChar;
         }else{
